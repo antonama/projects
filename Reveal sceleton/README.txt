@@ -1,3 +1,7 @@
+You need grunt to run grunt tasks, so, install it globally using
+npm i -g grunt
+npm i -g grunt-cli
+
 1. To create your presentation, navigate to 'master' folder and start editing 'index.html' file.
 Read 'REVEAL SYNTAX.txt' for more information about editing this file.
 IMPORTANT NOTE!!!

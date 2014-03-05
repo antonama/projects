@@ -1,0 +1,1 @@
+cd .. && npm i && npm i -g node-static && grunt && cd scripts && create-client.cmd

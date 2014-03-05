@@ -1,0 +1,580 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+
+		<title>Kiryl Baranoshnik: AngularJS for begginers</title>
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/default.css" id="theme">  <!-- default, beige, sky, night, serif, simple, solarized, blood -->
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+    			<section>
+    				<h1>AngularJS</h1>
+					<div>Basics</div>
+				</section>
+
+				<section>
+					<h2>Kiryl Baranoshnik</h2>
+					<ul>
+						<li class="fragment grow" data-fragment-index="0">Agile developer</li>
+				        <li class="fragment grow" data-fragment-index="1">ScrumMaster</li>
+				        <li class="fragment grow" data-fragment-index="2">Using AngularJS extensively for a year</li>
+				    </ul>
+				</section>
+
+				<section>
+					<h2>AGENDA</h2>
+				    <ul>
+						<li>Intro</li>
+				        <li>View and controller</li>
+				        <li>Directives and filters</li>
+				        <li>Two-way data binding</li>
+				        <li>Event handlers</li>
+				        <li>RESTful services and $resource</li>
+				        <li>Testing</li>
+				    </ul>
+				</section>
+
+				<section>
+					<section>
+            			<h2>INTRO</h2>
+            			<p>Framework installation. Main concepts. Bootstrapping.</p>
+            		</section>
+
+            		<section>
+            			<p>AngularJS features</p>
+					    <ul>
+							<li class="fragment">MVC</li>
+					        <li class="fragment">Dependency Injection</li>
+					        <li class="fragment">Plain JS models</li>
+					        <li class="fragment">All-In-One</li>
+					        <li class="fragment">Modular architecture</li>
+					        <li class="fragment">Testing bundled</li>
+					        <li class="fragment">Directives (reusable components)</li>
+					    </ul>
+					</section>
+
+					<section>
+        				<h2>MVC</h2>
+					    <ul>
+							<li>First introduced in 1979 by Trygve Reenskaug</li>
+					        <li>Splits the presentation from the logic and the user input</li>
+					    </ul>
+						<br>
+						<img src="https://s3.amazonaws.com/media-p.slid.es/uploads/antonama/images/264855/MVC_scheme.png">
+					</section>
+
+					<section>
+        				<p>Dependency injection</p>
+						<img src="https://s3.amazonaws.com/media-p.slid.es/uploads/antonama/images/264859/DI.png">
+						<br>
+					</section>
+
+					<section>
+						<h1>Bootstrapping</h1>
+						<br>
+						<p>Template</p>
+						<pre><code data-trim>
+&lt;!doctype html&gt;
+&lt;html lang="en" ng-app="myApp"&gt;
+	&lt;head&gt;
+		&lt;meta charset="utf-8"&gt;
+		&lt;title&gt;My HTML File&lt;/title&gt;
+		&lt;script src="lib/angular/angular.js"&gt;&lt;/script&gt;
+	&lt;/head&gt;
+	&lt;body&gt;
+		...
+	&lt;/body&gt;
+&lt;/html&gt;
+						</code></pre>
+						<p>Code</p>
+						<pre><code data-trim>
+angular.module('myApp', []); 
+						</code></pre>
+					</section>
+				</section>
+
+				<section>
+    				<section>
+    					<h2>Views And Controllers</h2>
+						<p>Controllers. Templates. Scopes.</p>
+					</section>
+
+					<section>
+    					<h2>Angular Template</h2>
+    					<pre><code data-trim> 
+&lt;html ng-app="phonecatApp"&gt;
+   ...
+   &lt;body ng-controller="PhoneListController"&gt;
+      &lt;ul&gt;
+         &lt;li ng-repeat="phone in phones"&gt;
+            &lt;p&gt;{{ phone.name }}&lt;/p&gt;
+            &lt;p&gt;{{ phone.snippet }}&lt;/p&gt;
+         &lt;/li&gt;
+      &lt;/ul&gt;         
+   &lt;/body&gt;
+&lt;/html&gt;
+						</code></pre>
+					</section>
+
+					<section>
+    					<h2>Angular Scope<img src="https://s3.amazonaws.com/media-p.slid.es/uploads/antonama/images/265159/Scope.png"></h2>
+    				</section>
+
+    				<section>
+    					<h2>Controller</h2>
+    					<div>Template</div>
+						<pre><code data-trim>
+&lt;div ng-controller="MyControler"&gt;
+   {{ data }}
+&lt;/div&gt;
+						</code></pre>
+						<div>Code</div>
+						<pre><code data-trim>
+angular.module('myApp')
+.controller('MyController', function($scope) { 
+    $scope.data = {};
+});
+						</code></pre>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Directives And filters</h2>
+						<p>Directives. ngRepeat. Filters.</p>
+					</section>
+
+					<section>
+						<h2>Look And feel</h2>
+						<pre style="width:1100px;"><code data-trim>
+&lt;div ng-switch-when="forked"&gt;
+   &lt;div class="span1 type"&gt;
+      &lt;i ng-class="event.icon"&gt;&lt;/i&gt;
+   &lt;/div&gt;
+   &lt;div class="span11"&gt;
+      &lt;plunker-inline-user user="event.user"&gt;&lt;/plunker-inline-user&gt;
+         created 
+         &lt;plunker-inline-plunk plunk="event.child"&gt; {{event.child.id}} &lt;/plunker-inline-plunk&gt;
+         by forking this plunk &lt;abbr timeago="event.date"&gt;&lt;/abbr&gt;.
+   &lt;/div&gt;
+&lt;/div&gt;
+						</code></pre>
+					</section>
+
+					<section>
+						<h2>Forms of directives</h2>
+						<br>
+						<div>Preffered:</div>
+						<ul>
+							<li style="padding-left:0;">Element: <pre style="display:inline;"><code style="display:inline;">&lt;ng-include&gt; &lt;/ng-include&gt;</code></pre></li>
+							<li>Argument: <pre style="display:inline;"><code style="display:inline;">&lt;input ng-model="data"&gt;&lt;/input&gt;</code></pre></li>
+						</ul>
+						<br>
+						<br>
+						<div>also:</div>
+					    <ul>
+					    	<li>Class: <pre style="display:inline;"><code style="display:inline;">&lt;span class="ng-bind: {expression};"&gt; &lt;/span&gt;</code></pre></li>
+					    	<li>Comment: <pre style="display:inline;"><code style="display:inline;">&lt;!-- directive: ng-include  --&gt;</code></pre></li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>ng-repeat</h2>
+						<br>
+						<pre><code style="width:900px;" data-trim>
+&lt;ul&gt;
+   &lt;li ng-repeat="friend in friends"&gt;
+      [{{ $index + 1 }}] {{ friend.name }} who is {{ friend.age }} years old.
+   &lt;/li&gt;
+&lt;/ul&gt;
+						</code></pre>
+					</section>
+
+					<section>
+						<h2>Standard filters</h2>
+						<ul>
+							<li>currency</li>
+							<li>date</li>
+							<li>filter</li>
+							<li>json</li>
+							<li>limitTo</li>
+							<li>lowercase</li>
+							<li>number</li>
+							<li>orderBy</li>
+							<li>uppercase</li>
+						</ul>
+					</section>
+				</section>
+
+				<section>
+					<section data-background-size="cover" data-background-image="https://s3.amazonaws.com/media-p.slid.es/uploads/antonama/images/265140/Irresistible-Henry-House-baby.jpg">
+						<h2 class="absolute-element" style="position: absolute; top:-100px; right:20px;"><font color="#ffffff">PRACTICE #1</font></h2>
+					</section>
+
+					<section>
+						<h2>Task</h2>
+						<div>http://goo.gl/grrTPW</div>
+							<ul>
+								<li>Create an angular application (bootstrap with ng-app).</li>
+						        <li>Create a controller and a template.</li>
+						        <li>Initialize the list of repos in the controller.</li>
+						        <li>Display the data on the view as a list of panels where the following is displayed:</li>
+        						<ul>
+									<li>Repo's full name that is a link to the repo.</li>
+						            <li>Repo owner's login ID and avatar.</li>
+						            <li>Repo's description.</li>
+						        </ul>
+						        <li>Output only 10 repos tha come first alphabetically, order by full name ascending.</li>
+						    </ul>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Two-way Data binding</h2>
+						<p>ngModel</p>
+					</section>
+
+					<section>
+						<br>
+						<div>ngModel</div>
+						<pre><code data-trim> 
+&lt;input ng-model="model.data"&gt;&lt;/input&gt;
+						</code></pre>
+					</section>
+				</section>
+
+				<section>
+					<section data-background-size="cover" data-background-image="https://s3.amazonaws.com/media-p.slid.es/uploads/antonama/images/265042/diablo_wip_by_garylaibart-d778970.jpg">&nbsp;<h2 class="absolute-element" style="position: absolute; width: 307px; height: 68px; z-index: 4; left: 635px; top: 59px;">PRACTICE #2</h2>
+					</section>
+
+					<section>
+						<h2>Task</h2>
+						<div>http://goo.gl/CoqXPy</div>
+						<ul>
+							<li>Update the application so that the filtering params can be set on the page via inputs</li>
+					        <li>Default values should populate the inputs on load:</li>
+	    					<ul>
+								<li>Filter: empty,</li>
+	        					<li>Sort by name: asc,</li>
+			            		<li>Limit: 10.</li>
+	    					</ul>
+	    					<li>Each time any of the values changes, the displayed list update accordingly.</li>
+	    				</ul>
+	    			</section>
+    			</section>
+
+    			<section>
+    				<section>
+    					<h2>Event Handlers</h2>
+    					<div>Calling events from the view</div>
+    				</section>
+
+    				<section>
+    					<h2>Event handlers as scope methods</h2>
+    					<div>Template</div>
+    					<pre><code data-trim>
+&lt;div ng-controller="MyController"&gt;
+   &lt;button ng-click="do()"&gt;&lt;/button&gt;
+&lt;/div&gt;
+						</code></pre>
+    					<div>Code</div>
+    					<pre><code data-trim>
+angular.module("myApp")
+.controller('MyController', function($scope){
+   $scope.do = function() {};
+});
+						</code></pre>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>RESTful SERVICES and $resource</h2>
+						<div>HTTP and RESTful services. Injecting services.</div>
+					</section>
+
+					<section>
+						<br>
+						<div>$http and $resource (in ngResource)</div>
+						<br>
+						<ul>
+							<li>$http is a low-level service for AJAX calls</li>
+							<li>$resource is based on $http</li>
+							<li>$resource facilitates interaction with RESTful services</li>
+						</ul>
+					</section>
+				</section>
+
+				<section>
+					<section data-background-image="https://s3.amazonaws.com/media-p.slid.es/uploads/antonama/images/265130/tempCamp_Practice_072613_000--nfl_mezz_1280_1024.jpg" data-background-size="cover">
+						<h2 class="absolute-element" style="position:absolute; top:-300px;">PRACTICE #3</h2>
+					</section>
+
+					<section>
+						<h2>TASK</h2>
+						<div>http://goo.gl/75hgJq</div>
+						<ul style="font-size: 24px;">
+							<li>Update the application so that it gets the list of repos via the Github API.</li>
+							<li>Add a panel with the search param that will allow to narrow the search request by:</li>
+        					<ul>
+        						<li>Maximum repo size,</li>
+        						<li>Minimum number of forks,</li>
+        						<li>Minimum number of stars.</li>
+        					</ul>
+        					<li>Add the "Search" button that will query the data based on the specified parameters.</li>
+        					<li>Create a separate service named "Repository" for this and inject in the controller.</li>
+        					<li>Using $resource get the following related data and add to each repo view:</li>
+        					<ul>
+        						<li>Languages,</li>
+        						<li>Contributors names and avatars.</li>
+        					</ul>
+        				</ul>
+        			</section>
+        		</section>
+
+        		<section>
+        			<section>
+        				<h2>Testing</h2>
+        				<img src="https://s3.amazonaws.com/media-p.slid.es/uploads/antonama/images/265154/5_testing.png">
+        				<p>ngMock. Testing controllers. Testing services.</p>
+        			</section>
+
+        			<section>
+        				<h2>Jasmine</h2>
+					    <ul>
+							<li>BDD-style testing framework</li>
+							<li>Syntax based on rspec</li>
+							<li>Bundled mocking functionality</li>
+						</ul>
+					</section>
+
+					<section>
+						<br>
+						<div>ngMock</div>
+						<br>
+						<div>Most used features:</div>
+						<br>
+						<ul>
+							<li>
+								<font color="#00ffff">module()</font> - load existing module by name or create custom module
+							</li>
+							<li>
+								<font color="#00ffff">inject()</font> - inject and arbitary
+							</li>
+							<li>
+								<font color="#00ffff">$httpBackend</font> - mock the backend of $http in order to test AJAX requests
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>inject() an Module()</h2>
+						<div>Pass as a function</div>
+						<pre><code data-trim>
+beforeEach(module('myModule'));
+it(inject(function(_service_){
+    service = _service_;
+}));
+						</code></pre>
+						<div>Or call directly</div>
+						<pre><code data-trim>
+beforeEach(function() {
+   module('myModule');
+});
+it(function() {
+   inject(function(_service_) {
+      service = _service_;
+  });
+});
+						</code></pre>
+						<div>Works with <font color="#00ffff">beforeEach()</font>, <font color="#00ffff">afterEach()</font> and <font color="#00ffff">it()</font></div>
+					</section>
+
+					<section>
+						<h2>$controller</h2>
+						<pre><code data-trim> 
+$controller('PhoneListCtrl', {$scope:scope})
+						</code></pre>
+					</section>
+
+					<section>
+						<h2>The approach to test a controller</h2>
+						<br>
+					    <ul>
+						<li>Load the module</li>
+						        <li>Create a new scope with $rootScope.new()</li>
+						        <li>Create the controller with $controller</li>
+						        <ul>
+									<li>Inject your scope into the $controller call</li>
+						        </ul>
+						</ul>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Homework</h2>
+					</section>
+
+					<section>
+						<h2>Task</h2>
+						<div>http://goo.gl/s380ot</div>
+						<br>
+						<ul>
+							<li>Create tests for the controller and for the service.</li>
+							<li>Mock the service for the controller test.</li>
+							<li>Use $httpBackend mock the service test.</li>
+						</ul>
+					</section>
+				</section>
+
+				<section>
+					<h2>Contact ME</h2>
+					<br>
+					<a href="http://kirbarn.blogspot.com">http://kirbarn.blogspot.com</a>
+					<div>kiryl_baranoshnik@epam.com</div>
+					<div>@kirbarn</div>
+				</section>
+
+				<section>
+					<h2>References</h2>
+					<ul>					
+						<li><a href="http://docs.angularjs.org/tutorial" target="_blank">Angular tutorial</a></li>
+						<li><a href="http://ww.angularjs.org" target="_blank">Official site</a></li>
+						<li><a href="http://www.dummies.com/how-to/content/the-modelviewcontroller-mvc-design-pattern.html" target="_blank">MVC for dummies</a></li>
+				</ul>
+				</section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+
+			Reveal.initialize({
+
+			    // Display controls in the bottom right corner
+			    controls: true,
+
+			    // Display a presentation progress bar
+			    progress: true,
+
+			    // Display the page number of the current slide
+			    slideNumber: false,
+
+			    // Push each slide change to the browser history
+			    history: true,
+
+			    // Enable keyboard shortcuts for navigation
+			    keyboard: true,
+
+			    // Enable the slide overview mode
+			    overview: true,
+
+			    // Vertical centering of slides
+			    center: true,
+
+			    // Enables touch navigation on devices with touch input
+			    touch: true,
+
+			    // Loop the presentation
+			    loop: false,
+
+			    // Change the presentation direction to be RTL
+			    rtl: false,
+
+			    // Turns fragments on and off globally
+			    fragments: true,
+
+			    // Flags if the presentation is running in an embedded mode,
+			    // i.e. contained within a limited portion of the screen
+			    embedded: false,
+
+			    // Number of milliseconds between automatically proceeding to the
+			    // next slide, disabled when set to 0, this value can be overwritten
+			    // by using a data-autoslide attribute on your slides
+			    autoSlide: 0,
+
+			    // Stop auto-sliding after user input
+			    autoSlideStoppable: true,
+
+			    // Enable slide navigation via mouse wheel
+			    mouseWheel: false,
+
+			    // Hides the address bar on mobile devices
+			    hideAddressBar: true,
+
+			    // Opens links in an iframe preview overlay
+			    previewLinks: false,
+
+			    // Transition style
+			    transition: 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+			    // Transition speed
+			    transitionSpeed: 'default', // default/fast/slow
+
+			    // Transition style for full page slide backgrounds
+			    backgroundTransition: 'default', // default/none/slide/concave/convex/zoom
+
+			    // Number of slides away from the current that are visible
+			    viewDistance: 3,
+
+			    // Parallax background image
+			    // parallaxBackgroundImage: '', // e.g. "'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg'"
+
+			    // Parallax background size
+			    // parallaxBackgroundSize: '' // CSS syntax, e.g. "2100px 900px"
+			    multiplex: {
+			        // Example values. To generate your own, got to [server-address]:[server-port]/token
+			        secret: '13938773031275099188', // Obtained from the socket.io server. Gives this (the master) control of the presentation
+			        id: 'e3d99f2849a13d82', // Obtained from socket.io server
+			        url: 'epbyminw3993::1948' // Location of socket.io server
+			    },
+
+			    // Optional libraries used to extend on reveal.js
+			    dependencies: [
+			    	{ src: 'plugin/socket.io/socket.io.min.js', async: true },
+			    	{ src: 'plugin/multiplex/master.js', async: true },
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'js/rolling-links.js', async: true } // if you don't want rolling links in your presentation, comment or remove this option
+				]
+
+			});
+
+		</script>
+	</body>
+</html>
