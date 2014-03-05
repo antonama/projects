@@ -1,0 +1,1 @@
+cd ../.. && mkdir client && cd client && xcopy ..\master /s/EXCLUDE:..\master\ignore.txt

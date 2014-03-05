@@ -1,0 +1,476 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+
+	<title>reveal.js - The HTML Presentation Framework</title>
+
+	<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+	<meta name="author" content="Hakim El Hattab">
+
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<link rel="stylesheet" href="css/reveal.min.css">
+	<link rel="stylesheet" href="css/theme/blood.css" id="theme"> <!-- default, beige, sky, night, serif, simple, solarized, blood -->
+
+	<!-- For syntax highlighting -->
+	<link rel="stylesheet" href="lib/css/zenburn.css">
+
+	<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+	<script>
+	document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+	</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h1>Web slideshow World</h1>
+					<h5>or Forget Old Fart PowerPoint</h5>
+					<p>by Anton Abramovich</p>
+				</section>
+				<section>
+					<section>
+						<h2>Introducing Reveal.js</h2>
+						<div>What the heck is it?</div>
+					</section>
+					<section>
+						<h2>Reveal.js</h2>
+						<blockquote>
+							<span>
+								<font>"A framework for easily creating beautiful presentations using HTML"</font>
+							</span>
+						</blockquote>
+						<blockquote style="text-align: right;">
+							<span>Hakim El Hattab - the author</span>
+						</blockquote>
+						<br>
+					</section>
+					<section>
+						<h2>REVEAL.js</h2>
+						<div class="fragment grow" style="display:inline-block;">allow</div> 
+						<div class="fragment shrink" style="display:inline-block;">do</div> 
+						<div class="fragment roll-in" style="display:inline;">cool</div> 
+						<div class="fragment highlight-red" style="display:inline;">things</div> 
+						<div class="fragment highlight-blue" style="display:inline;">in</div> 
+						<div class="fragment highlight-green" style="display:inline;">modern</div> 
+						<div class="fragment" style="display:inline;">browsers</div>
+						<br>
+						<div class="fragment">and <a href="http://lab.hakim.se/reveal-js/#/" target="_blank">more</a></div>
+					</section>
+				</section>
+				<section>
+					<h2>Reveal.js</h2>
+					<div>Killer features</div>
+					<br>
+					<div>
+						<ul>
+							<li class="fragment" data-fragment-index="0">Online editor</li>
+							<li class="fragment" data-fragment-index="1">Nice default styles</li>
+							<li class="fragment" data-fragment-index="2">Code highlighter</li>
+							<li class="fragment" data-fragment-index="3">Two-way navigation</li>
+							<li class="fragment" data-fragment-index="4">Export to PDF</li>
+							<li class="fragment" data-fragment-index="5">"Pause" mode</li>
+							<li class="fragment" data-fragment-index="6">Multiplexing</li>
+							<li class="fragment" data-fragment-index="7">It is absoultely free</li>
+						</ul>
+					</div>
+
+				</section>
+				<section>
+					<section>
+						<h2>REVEAL.js</h2>
+						<div>"How to" guide</div>
+						<br>
+						<div>Simply use <a href="http://slid.es" target="_blank">slid.es</a>
+						</div>
+					</section>
+					<section>
+						<h2>but if you feel like html/css ninja</h2>
+						<div>use <a href="https://github.com/hakimel/reveal.js" target="_blank">the source</a></div>
+						<div class="fragment fade-in" data-fragment-index="0">and follow next steps...</div>
+						<img src="https://s3.amazonaws.com/media-p.slid.es/uploads/antonama/images/266560/Alice_AMA_render.png" class="fragment" data-fragment-index="1" style="max-height:400px;">
+					</section>
+					<section>
+						<h2>Step 1</h2>
+						<div>Add references to the reveal.js <code>&lt;base&gt;</code></div>
+						<div>and theme style sheets to the <code>&lt;head&gt;</code>section</div>
+						<div>
+							<pre><code data-trim> 
+&lt;link rel="stylesheet" href="css/reveal.min.css"&gt;
+&lt;link rel="stylesheet" href="css/theme/default.css" id="theme"&gt; 
+							</code></pre>
+						</div>
+					</section>
+					<section>
+						<h2>Step 2</h2>
+						<div>Each slide is &lt;section&gt; element</div>
+						<div>inside this structure</div>
+						<div>
+							<pre><code data-trim>
+&lt;div class="reveal"&gt;  
+   &lt;div class="slides"&gt;    
+     ...  
+   &lt;/div&gt;
+&lt;/div&gt;
+							</code></pre>
+						</div>
+					</section>
+					<section>
+						<h2>Step 3</h2>
+						<div><code>&lt;section&gt;</code> inside other <code>&lt;section&gt;</code> is a vertical slide</div>
+						<div>
+							<span>The first of the vertical slides is the "root" of the others,&nbsp;</span>
+						</div>
+						<div>and it will be included in the horizontal sequence.</div>
+						<pre><code data-trim>
+&lt;section&gt;
+   &lt;section&gt;Vertical slide 1&lt;/section&gt;
+   &lt;section&gt;Vertical slide 2&lt;/section&gt;
+&lt;/section&gt;
+						</code></pre>
+					</section>
+					<section>
+						<h2>Step 4</h2>
+						<div>Load Javascript references at bottom</div>
+						<pre><code data-trim>
+&lt;script src="lib/js/head.min.js"&gt;&lt;/script&gt;
+&lt;script src="js/reveal.min.js"&gt;&lt;/script&gt; 
+						</code></pre>
+					</section>
+					<section>
+						<h2>Step 5</h2>
+						<div>Call Reveal.initialize() at bottom</div>
+						<pre><code data-trim>
+&lt;script&gt;
+   Reveal.initialize({
+      controls: false  //optional
+   });
+&lt;/script&gt;
+						</code></pre>
+						<div>
+							<font color="#666666">
+								Required, even if empty.
+							</font>
+						<div>
+					</section>
+					<section>
+						<h2>Final step</h2>
+						<div>Make your own <a href="https://github.com/hakimel/reveal.js/wiki/Example-Presentations" target="_blank">awesomeness</a></div>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Color Schemes</h2>
+						<div>
+							<span>The framework comes with a few different themes included:</span>
+						</div>
+						<br>
+						<div>
+							<ul>
+								<li><font color="#666666">default: </font> Gray background, white text, blue links</li>
+								<li><font color="#6fa8dc">sky: </font> Blue background, thin white text, blue links</li>
+								<li><font color="#7f6000">serif: </font> Cappuccino background, gray text, brown links</li>
+							</ul>
+						</div>
+						<br>
+						<div>and <a href="http://lab.hakim.se/reveal-js/#/themes" target="_blank">more...</a></div>
+					</section>
+					<section>
+						<h2>Color Schemes</h2>
+						<br>
+						<div>
+							<span>Each theme is available as a separate stylesheet.&nbsp;</span>
+						</div>
+						<div>To change theme, replace <b><i>default </i></b> with desired theme name</div>
+						<div>
+							<pre><code data-trim> 
+&lt;link rel="stylesheet" href="css/theme/default.css" id="theme"&gt; 
+							</code></pre>
+						</div>
+					</section>
+					<section>
+						<h2>Create your <a href="https://github.com/hakimel/reveal.js/tree/master/css/theme" target="_blank">own</a></h2>
+					</section>
+					</section>
+					<section>
+						<section>
+							<h2>Browser Support</h2>
+							<div>
+								<span>reveal.js has five tiers of browser support:</span>
+							</div>
+							<br>
+							<div>1. 3D Transforms version</div>
+							<br>
+							<div>
+								<font color="#00ff00">Chrome</font>, <font color="#4a86e8">Safari</font>, <font color="#e69138">Firefox</font>, 
+								<font color="#ff0000">Opera</font> and <font color="#4a86e8">IE10</font>.
+							</div>
+						</section>
+
+						<section>
+							<h2>Browser support</h2>
+							<br>
+							<div>2. 2D UI with only linear animations</div>
+							<br>
+							<div>
+								<font color="#f1c232">Maxthon</font>, <font color="#6aa84f">Android 2.3.7</font> stock browser, <font color="#93c47d">Dolphin 9.</font>
+							</div>
+						</section>
+						<section>
+							<h2>Browser support</h2>
+							<br>
+							<div>3. 2D UI with no animation</div>
+							<br>
+							<div>
+								<font color="#4a86e8">IE9</font>, <font color="#e69138">Firefox 3.6</font>
+							</div>
+						</section>
+						<section>
+							<h2>Browser support</h2>
+							<br>
+							<div>3. 2D UI showing all slides in a vertical row</div>
+							<br>
+							<div>
+								<font color="#4a86e8">IE8</font>, the <font color="#cc0000">Kindle Fire</font>
+								<font color="#cc0000">Silk Browser</font> 1.0 and <font color="#f1c232">Maxthon Mobile</font>.
+							</div>
+						</section>
+						<section>
+							<h2>Browser support</h2>
+							<br>
+							<div>Absolutely no support</div>
+							<br>
+							<div>
+								<font color="#4a86e8">IE7</font> <font color="#4a86e8">and lower</font>, all <font color="#8e7cc3">non-JavaScript</font> browsers.
+							</div>
+						</section>
+					</section>
+					<section>
+						<section>
+							<h2>Alternatives</h2>
+							<br>
+							<div>
+								<ul>
+									<li>
+										<a href="http://prezi.com/" target="_blank">Prezi</a>
+									</li>
+									<li>
+										<a href="https://github.com/bartaz/impress.js" target="_blank">Impress.js</a>
+									</li>
+									<li>PowerPoint</li>
+									<li>
+										<a href="https://docs.google.com/presentation" target="_blank">Google Slides</a>
+									</li>
+									<li>
+										<a href="http://remarkjs.com/" target="_blank">Remark.js</a>
+									</li>
+									<li>
+										<a href="http://imakewebthings.com/deck.js" target="_blank">Deck.js</a>
+									</li>
+									<li>
+										<a href="http://lea.verou.me/csss/sample-slideshow.html" target="_blank">Brought to you by Lea Verou</a>
+									</li>
+									<li>
+										<a href="http://slides.html5rocks.com/" target="_blank">HTML5Rocks Presentator</a>
+									</li>
+								</ul>
+							</div>
+						</section>
+						<section>
+							<h2>Prezi</h2>
+							<br><br>
+							<div>
+								<a href="http://prezi.com/ydrrwuhiayuh/so/" target="_blank">My 10 minutes work</a>
+							</div>
+							<br>
+							<div>
+								<a href="https://www.youtube.com/watch?v=M0k3giXi8eM" target="_blank">Could do great things</a>
+							</div>
+						</section>
+						<section>
+							<h2>Impress.js</h2>
+							<br>
+							<div>
+								<a href="https://github.com/bartaz/impress.js" target="_blank">Make all by yourself</a>
+							</div>
+							<br>
+							<div>
+								<a href="http://cool-gadget-shop.com/#/party-game-back" target="_blank">But if you could...</a>
+							</div>
+							<br>
+							<ul style="list-style:none;">
+								<li>
+									<a href="http://www.hashdog.com/brochure" style="text-align:left;">And more</a>
+								</li>
+								<li>
+									<a href="https://github.com/bartaz/impress.js/wiki/Examples-and-demos">And moooore</a>
+								</li>
+								<li>
+									<a href="http://johnpolacek.github.io/WhatTheHeckIsResponsiveWebDesign-impressjs/#/adaptive-responsive">You could great things</a>
+								</li>
+								<li>
+									<a href="http://www.packtpub.com/building-impressive-presentations-with-impressjs/book">WTF?!</a>									
+								</li>
+							</ul>
+						</section>
+					</section>
+					<section>
+						<h2>Google says...</h2>
+						<br><br>
+						<div>
+							<a href="http://www.google.by/trends/" target="_blank">Slideshow systems queries</a>
+						</div>
+					</section>
+					<section>
+						<section>
+							<h2>Special thanks to</h2>
+							<br>
+							<div>
+								<a href="http://hakim.se/" target="_blank">Hakim El Hattab</a>
+							</div>
+						</section>
+						<section>
+							<h2>and these guys</h2>
+							<br>
+							<div>
+								<ul>
+									<li>
+										<a href="http://dl.dropboxusercontent.com/u/39519/talks/jsconf-tools/index.html">Paul Irish</a>
+									</li>
+									<li>
+										<a href="http://rodxavier.github.io/acm-big-data/#/">Rod Xavier Bondoc</a>
+									</li>
+									<li>
+										<a href="http://blattchat.com/presos/MyBrowserCanDoThat/#/">Alan Greenblatt</a>
+									</li>
+									<li>
+										<a href="http://dimroc.github.io/reveal.js-threejs/#/">Dimitri Roche</a>
+									</li>
+								</ul>
+							</div>
+						</section>
+					</section>
+				</div>
+			</div>
+
+			<script src="lib/js/head.min.js"></script>
+			<script src="js/reveal.min.js"></script>
+
+			<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+
+			Reveal.initialize({
+
+			    // Display controls in the bottom right corner
+			    controls: true,
+
+			    // Display a presentation progress bar
+			    progress: true,
+
+			    // Display the page number of the current slide
+			    slideNumber: false,
+
+			    // Push each slide change to the browser history
+			    history: true,
+
+			    // Enable keyboard shortcuts for navigation
+			    keyboard: true,
+
+			    // Enable the slide overview mode
+			    overview: true,
+
+			    // Vertical centering of slides
+			    center: true,
+
+			    // Enables touch navigation on devices with touch input
+			    touch: true,
+
+			    // Loop the presentation
+			    loop: false,
+
+			    // Change the presentation direction to be RTL
+			    rtl: false,
+
+			    // Turns fragments on and off globally
+			    fragments: true,
+
+			    // Flags if the presentation is running in an embedded mode,
+			    // i.e. contained within a limited portion of the screen
+			    embedded: false,
+
+			    // Number of milliseconds between automatically proceeding to the
+			    // next slide, disabled when set to 0, this value can be overwritten
+			    // by using a data-autoslide attribute on your slides
+			    autoSlide: 0,
+
+			    // Stop auto-sliding after user input
+			    autoSlideStoppable: true,
+
+			    // Enable slide navigation via mouse wheel
+			    mouseWheel: false,
+
+			    // Hides the address bar on mobile devices
+			    hideAddressBar: true,
+
+			    // Opens links in an iframe preview overlay
+			    previewLinks: false,
+
+			    // Transition style
+			    transition: 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+			    // Transition speed
+			    transitionSpeed: 'default', // default/fast/slow
+
+			    // Transition style for full page slide backgrounds
+			    backgroundTransition: 'default', // default/none/slide/concave/convex/zoom
+
+			    // Number of slides away from the current that are visible
+			    viewDistance: 3,
+
+			    // Parallax background image
+			    // parallaxBackgroundImage: '', // e.g. "'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg'"
+
+			    // Parallax background size
+			    // parallaxBackgroundSize: '' // CSS syntax, e.g. "2100px 900px"
+
+			    // Optional libraries used to extend on reveal.js
+		        multiplex: {
+			        // Example values. To generate your own, see the socket.io server instructions.
+			        secret: '13938773031275099188', // Obtained from the socket.io server. Gives this (the master) control of the presentation
+			        id: 'e3d99f2849a13d82', // Obtained from socket.io server
+			        url: 'localhost::1948' // Location of socket.io server
+			    },
+
+			    dependencies: [
+			    	{ src: '//cdnjs.cloudflare.com/ajax/libs/socket.io/0.9.6/socket.io.min.js', async: true },
+			    	{ src: 'plugin/multiplex/master.js', async: true },
+				    { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+				    { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+				    { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+				    { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+				    { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+				    { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+			    ]
+
+			});
+
+</script>
+
+</body>
+</html>

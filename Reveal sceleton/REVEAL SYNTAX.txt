@@ -1,0 +1,82 @@
+HTML:
+
+1.
+<div class="reveal">
+   <div class="slides">
+      ...
+   </div>
+</div>
+
+- the basic structure of the body of your presentation
+
+2. 
+each <section> element is a slide
+
+3.
+nested <section> elements are vertical slides
+first nested slide fill be shown in a horizontal row
+
+4.
+headers are <h1>-<h6> tags
+use them to pay attention to your slide
+
+5.
+main element inside <section> element is <div>
+it represents block with text inside it, which is very useful
+feel free to use <span> and <p>
+
+6.
+to insert line breaks, use <br>
+css is not cool here
+
+7.
+code blocks can be decorated with <pre><code> [your code here] </code><pre>
+begin code with new line and no indent in your text editor for correct displaying
+
+8.
+Feel free to use all HTML5 tags, like <small></small>, <blockquote></blockquote>, 
+<cite></cite>, <font></font>, <video></video> to markup your content
+
+9.
+Use target="_blank" to force youe links open in a new tab
+
+10.
+<aside class="notes"></aside> is used for speaker notes
+when clicking 's' on keyboard, you can see separate browser window with current slide, next slide and notes
+
+11.
+data-attributes:
+
+data-autoslide - Number of milliseconds between automatically proceeding to the next slide
+data-background (color or image) - for custom slide background
+data-background-transition - for custom background transition
+data-transition - for sustom slide tranistion
+data-transition-speed - for custom speed
+data-fragment-index - for defining order of fragments
+data-trim - for remove surrounding whitespaces (only for <code> tag)
+data-autoplay - automatically play video on the page
+data-ignore - ignore pausing video when leaving slide
+
+
+CSS:
+
+1.
+class="fragment grow" - for appearing after separate click
+grow/shrink/roll-in/fade-out/current-visible/highlight-current-blue/highlight-red/highlight-green/highlight-blue
+
+2.
+<a href="#" class="navigate-x">, where x is left/right/up/down/prev/next
+force presentation to navigate to specified direction
+
+
+JS:
+
+1.
+Initial configuration could be updated, using 'configure' method
+<script>
+Reveal.configure({ autoSlide: 5000 });
+</script>
+
+
+USE THE SOURCE FOR MORE INFORMATION
+https://github.com/hakimel/reveal.js
