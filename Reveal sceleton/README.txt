@@ -27,7 +27,7 @@ To host and configure your client presentation on GitHub pages, follow next step
 	- create github account
 	- create new repository called as [username].github.io
 	- push 'client' folder to repository (git init -> 
-git remote add origin https://github.com/[username]/[username].github.io.git -> git pull origin master -> git add . -> git commit -m "First commit" -> git push)
+git remote add origin https://github.com/[username]/[username].github.io.git -> git pull origin master -> git add . -> git commit -m "First commit" -> git push -u origin master)
 
 5. Start 'start-servers.cmd'. 
 It will start static and socket servers and will open Google Chrome on localhost:8080.
