@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Promise</title>
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.min.js"></script>
+	<script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+	<script src="ang.js"></script>
+</head>
+<body ng-app="promiseApp" ng-controller="TimeOutCtrl">
+	<div>
+		<input type="text" placeholder="Timeout goes here" ng-model="msec">
+		<input type="button" value="Timeout" ng-click="callAsyncShow()">
+		<ul>
+			<li ng-repeat="city in cities">{{city}}</li>
+		</ul>
+	</div>
+	<div>
+		<input type="text" placeholder="Real query goes here" ng-model="query">
+		<input type="button" value="Timeout" ng-click="callAsyncGet()">
+		<ul>
+			<li ng-repeat="result in searchResults">{{result.Title}}</li>
+		</ul>
+	</div>
+
+
+	<div>
+		<input type="button" value="Fetch data" ng-click="fetchData()">
+		<div ng-bind="is">{{is}}</div>
+	</div>
+</body>
+</html>
